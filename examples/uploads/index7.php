@@ -45,7 +45,11 @@ function isValidUpload ($uploadedFile) {
 
 function handleUpload ($uploadedFile) {
 
-    if (is_uploaded_file($uploadedFile['tmp_name'])) {
+    if (
+        isValidUpload($uploadedFile) &&
+        isValidSize($uploadedFile) &&
+        isValidType($uploadedFile)
+    ) {
 
         $fileName = $uploadedFile['name'];
 
@@ -57,19 +61,7 @@ function handleUpload ($uploadedFile) {
 
 if (isset($_FILES['upload'])) {
 
-    // Hier stand vorher das switch () {}
-    // Jetzt steht das oben in isValidUpload()
-    if (!isValidUpload($_FILES['upload'])) {
-        echo('Etwas stimmt nicht mit der Datei...');
-    }
-        
-    if (!isValidSize($_FILES['upload'])) {
-        echo('Die Datei ist zu groß!');
-    }
-    
-    if (!isValidType($_FILES['upload'])) {
-        echo('Unerlaubter Datei-Typ!');
-    }
+    // Hier war doch was...
 
     handleUpload($_FILES['upload']);
 }
