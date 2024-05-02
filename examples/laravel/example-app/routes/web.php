@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +18,18 @@ Route::get('/register/success', function () {
 });
 
 Route::post("/register", [UserController::class, 'register']);
+
+
+
+
+// Hier geht's los:
+
+Route::get("/profile", [UserProfileController::class, 'view']);
+Route::get("/profile/edit", [UserProfileController::class, 'edit']);
+Route::post("/profile/edit", [UserProfileController::class, 'update']);
+
+
+
 
 // Countries
 /*
